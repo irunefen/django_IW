@@ -10,17 +10,25 @@
 </section>
 
 <section class="grid cols-4">
-  {% for i in "12345678" %}
+  {% for artista in artists %}
   <article class="card">
-    <div class="cover" aria-hidden="true"></div>
-    <h3 class="title" style="font-size:1.05rem; margin:.6rem 0 .2rem;">Nombre del Intérprete</h3>
+    <div class="cover" aria-label="Foto de {{ artista.nombre }}">
+      {% if artista.imagen %}
+      <img src="{{ artista.imagen }}" alt="{{ artista.nombre }}" loading="lazy">
+      {% endif %}
+    </div>
+    <h3 class="title card-title-sm">{{ artista.nombre }}</h3>
     <div class="chips">
-      <span class="chip">Tipo: Solista</span>
-      <span class="chip">Canciones: 12</span>
+      <span class="chip">Followers: {{ artista.followers|default:"0" }}</span>
+      <span class="chip">Canciones: {{ artista.canciones.count }}</span>
     </div>
-    <div class="row" style="margin-top:.6rem;">
-      <a class="btn" href="{% url 'artists:detail' slug='interprete' %}">Ver intérprete</a>
+    <div class="row mt-sm">
+      <a class="btn" href="{% url 'artists:detail' slug=artista.nombre|slugify %}">Ver intérprete</a>
     </div>
+  </article>
+  {% empty %}
+  <article class="card">
+    <p class="muted">No hay artistas disponibles.</p>
   </article>
   {% endfor %}
 </section>

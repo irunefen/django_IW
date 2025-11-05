@@ -15,18 +15,35 @@
 </section>
 
 <section class="section grid cols-3">
-  <!-- Tarjetas por estilo (placeholder) -->
-  {% comment %} Reemplazar este bloque con un loop de estilos y su canción top {% endcomment %}
-  {% for i in "123456" %}
+  {% for estilo, cancion in destacados %}
   <article class="card">
-    <div class="badge">Estilo: <strong>Pop</strong></div>
-    <div class="cover" aria-hidden="true"></div>
-    <h3 class="title" style="font-size:1.15rem; margin:.6rem 0 .2rem;">Canción destacada (placeholder)</h3>
-    <div class="muted">Intérprete · <span class="rank">#1</span> en el ranking de Pop</div>
-    <div class="row" style="margin-top:.8rem;">
-      <a class="btn ghost" href="{% url 'genres:detail' slug='pop' %}">Ver estilo</a>
-      <a class="btn" href="{% url 'songs:detail' pk=1 %}">Ver canción</a>
+    <div class="badge">Estilo: <strong>{{ estilo.nombre }}</strong></div>
+    <div class="cover" aria-label="Carátula de {{ cancion.nombre|default:'canción destacada' }}">
+      {% if cancion.album.imagen %}
+      <img src="{{ cancion.album.imagen }}" alt="Carátula de {{ cancion.album.titulo }}" loading="lazy">
+      {% endif %}
     </div>
+    {% if cancion %}
+    <h3 class="title card-title-lg">{{ cancion.nombre }}</h3>
+    <div class="muted">
+      {% for artista in cancion.artistas.all %}{{ artista.nombre }}{% if not forloop.last %}, {% endif %}{% endfor %}
+      · <span class="rank">#1</span> en el ranking de {{ estilo.nombre }}
+    </div>
+    <div class="row mt-base">
+      <a class="btn ghost" href="{% url 'genres:detail' slug=estilo.nombre|slugify %}">Ver estilo</a>
+      <a class="btn" href="{% url 'songs:detail' pk=cancion.pk %}">Ver canción</a>
+    </div>
+    {% else %}
+    <h3 class="title card-title-lg">Sin canciones</h3>
+    <div class="muted">No hay canciones disponibles para este estilo.</div>
+    <div class="row mt-base">
+      <a class="btn ghost" href="{% url 'genres:detail' slug=estilo.nombre|slugify %}">Ver estilo</a>
+    </div>
+    {% endif %}
+  </article>
+  {% empty %}
+  <article class="card">
+    <p class="muted">No hay estilos disponibles.</p>
   </article>
   {% endfor %}
 </section>

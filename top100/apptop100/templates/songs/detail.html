@@ -11,22 +11,31 @@
 
 <section class="grid cols-2 section">
   <div class="card">
-    <div class="cover" aria-label="Carátula (provisional)"></div>
+    <div class="cover cover-wide" aria-label="Carátula de {{ song.nombre }}">
+      {% if song.album.imagen %}
+      <img src="{{ song.album.imagen }}" alt="Carátula de {{ song.album.titulo }}" loading="lazy">
+      {% endif %}
+    </div>
   </div>
   <div class="card">
     <div class="kicker">Canción</div>
-    <h1 class="title">Título de Canción (provisional)</h1>
-    <p class="muted">Aquí irá la descripción o metadatos.</p>
-    <p>Estilo: <a class="badge" href="{% url 'genres:detail' slug='pop' %}">Pop</a></p>
+    <h1 class="title">{{ song.nombre }}</h1>
+    <p class="muted">Reproducciones: {{ song.reproducciones|default:"0" }} · Duración: {{ song.duracion|default:"0" }}s</p>
+    <p>Estilo: <a class="badge" href="{% url 'genres:detail' slug=song.estilo.nombre|slugify %}">{{ song.estilo.nombre }}</a></p>
     <p>Intérpretes:</p>
     <div class="chips">
-      <a class="chip" href="{% url 'artists:detail' slug='artista-x' %}">Artista X</a>
-      <a class="chip" href="{% url 'artists:detail' slug='artista-y' %}">Artista Y</a>
+      {% for artista in song.artistas.all %}
+      <a class="chip" href="{% url 'artists:detail' slug=artista.nombre|slugify %}">{{ artista.nombre }}</a>
+      {% empty %}
+      <span class="chip">Sin artistas</span>
+      {% endfor %}
     </div>
-    <p style="margin-top:1rem;">
-      Ranking actual: <span class="rank">#3</span>
+    <p class="mt-lg">
+      {% if song.album %}
+      Álbum: <strong>{{ song.album.titulo }}</strong>
+      {% endif %}
     </p>
-    <div class="row" style="margin-top:1rem;">
+    <div class="row mt-lg">
       <button class="btn" type="button" disabled>Reproducir (demo)</button>
       <a class="btn ghost" href="{% url 'songs:list' %}">Volver al listado</a>
     </div>

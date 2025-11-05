@@ -12,33 +12,40 @@
 <section class="grid cols-2 section">
   <article class="card">
     <div class="kicker">Estilo</div>
-    <h1 class="title">Rock (provisional)</h1>
-    <p class="muted">Descripción completa del estilo, orígenes, subgéneros, etc.</p>
-    <div class="chips" style="margin-top:.75rem;">
-      <span class="chip">Canciones: 42</span>
-      <span class="chip">Intérpretes: 15</span>
+    <h1 class="title">{{ genre.nombre }}</h1>
+    <p class="muted">{{ genre.descripcion|default:"Sin descripción disponible." }}</p>
+    <div class="chips mt-md">
+      <span class="chip">Canciones: {{ songs.count }}</span>
     </div>
   </article>
 
   <article class="card soft">
-    <h3 class="title" style="font-size:1.05rem;">Canción destacada</h3>
-    <p class="muted">La canción mejor posicionada en el ranking para este estilo.</p>
+    <h3 class="title card-title-featured">Canción destacada</h3>
+    {% if songs.first %}
+    <p class="muted"><strong>{{ songs.first.nombre }}</strong> - La canción mejor posicionada en el ranking para este estilo.</p>
     <div class="row">
-      <a class="btn" href="{% url 'songs:detail' pk=1 %}">Ver canción</a>
+      <a class="btn" href="{% url 'songs:detail' pk=songs.first.pk %}">Ver canción</a>
     </div>
+    {% else %}
+    <p class="muted">No hay canciones disponibles para este estilo.</p>
+    {% endif %}
   </article>
 </section>
 
 <section class="section card">
-  <h2 class="title" style="font-size:1.2rem;">Todas las canciones del estilo</h2>
+  <h2 class="title section-title">Todas las canciones del estilo</h2>
   <table class="table">
     <thead><tr><th>#</th><th>Título</th><th>Intérpretes</th></tr></thead>
     <tbody>
-      {% for i in "123456" %}
+      {% for cancion in songs %}
       <tr>
         <td class="rank">#{{ forloop.counter }}</td>
-        <td><a href="{% url 'songs:detail' pk=forloop.counter %}">Canción {{ forloop.counter }}</a></td>
-        <td class="muted">Artista X</td>
+        <td><a href="{% url 'songs:detail' pk=cancion.pk %}">{{ cancion.nombre }}</a></td>
+        <td class="muted">{% for artista in cancion.artistas.all %}{{ artista.nombre }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3" class="table-empty">No hay canciones para este estilo.</td>
       </tr>
       {% endfor %}
     </tbody>

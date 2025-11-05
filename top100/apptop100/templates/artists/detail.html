@@ -11,32 +11,42 @@
 
 <section class="grid cols-2 section">
   <div class="card">
-    <div class="cover" aria-label="Foto del intérprete (provisional)"></div>
+    <div class="cover cover-wide" aria-label="Foto de {{ artist.nombre }}">
+      {% if artist.imagen %}
+      <img src="{{ artist.imagen }}" alt="{{ artist.nombre }}" loading="lazy">
+      {% endif %}
+    </div>
   </div>
   <div class="card">
     <div class="kicker">Intérprete</div>
-    <h1 class="title">Nombre del Intérprete (provisional)</h1>
-    <p class="muted">Biografía o descripción corta.</p>
+    <h1 class="title">{{ artist.nombre }}</h1>
+    <p class="muted">Popularidad: {{ artist.popularidad|default:"0" }} · Followers: {{ artist.followers|default:"0" }}</p>
     <div class="chips">
-      <span class="chip">Tipo: Grupo</span>
-      <span class="chip">Origen: —</span>
+      {% if artist.nacionalidad %}
+      <span class="chip">Origen: {{ artist.nacionalidad }}</span>
+      {% endif %}
+      <span class="chip">Canciones: {{ songs.count }}</span>
     </div>
-    <div class="row" style="margin-top:1rem;">
+    <div class="row mt-lg">
       <a class="btn ghost" href="{% url 'artists:list' %}">Volver</a>
     </div>
   </div>
 </section>
 
 <section class="section card">
-  <h2 class="title" style="font-size:1.2rem;">Canciones del intérprete</h2>
+  <h2 class="title section-title">Canciones del intérprete</h2>
   <table class="table">
     <thead><tr><th>#</th><th>Título</th><th>Estilo</th></tr></thead>
     <tbody>
-      {% for i in "123456" %}
+      {% for cancion in songs %}
       <tr>
         <td class="rank">#{{ forloop.counter }}</td>
-        <td><a href="{% url 'songs:detail' pk=forloop.counter %}">Canción {{ forloop.counter }}</a></td>
-        <td><a href="{% url 'genres:detail' slug='pop' %}" class="badge">Pop</a></td>
+        <td><a href="{% url 'songs:detail' pk=cancion.pk %}">{{ cancion.nombre }}</a></td>
+        <td><a href="{% url 'genres:detail' slug=cancion.estilo.nombre|slugify %}" class="badge">{{ cancion.estilo.nombre }}</a></td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3" class="table-empty">Este artista no tiene canciones.</td>
       </tr>
       {% endfor %}
     </tbody>

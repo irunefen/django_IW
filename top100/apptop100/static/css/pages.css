@@ -1,0 +1,87 @@
+/* ===================================
+   PÁGINAS - Estilos específicos
+   =================================== */
+
+/* TÍTULOS DE SECCIONES */
+.section-title {
+  font-size: 1.2rem;
+}
+
+.card-title-lg {
+  font-size: 1.15rem;
+  margin: .6rem 0 .2rem;
+}
+
+.card-title-md {
+  font-size: 1.1rem;
+}
+
+.card-title-sm {
+  font-size: 1.05rem;
+  margin: .6rem 0 .2rem;
+}
+
+.card-title-featured {
+  font-size: 1.05rem;
+}
+
+.empty-title {
+  font-size: 1rem;
+}
+
+/* ESPACIADO */
+.mt-sm {
+  margin-top: .6rem;
+}
+
+.mt-md {
+  margin-top: .75rem;
+}
+
+.mt-base {
+  margin-top: .8rem;
+}
+
+.mt-lg {
+  margin-top: 1rem;
+}
+
+/* TABLAS - Mensajes vacíos */
+.table-empty {
+  text-align: center;
+  padding: 2rem;
+}
+
+/* BREADCRUMBS */
+.breadcrumbs {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+.breadcrumbs a {
+  color: var(--accent);
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs span {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.breadcrumbs::before {
+  content: '';
+}
+
+.breadcrumbs a::after {
+  content: '›';
+  margin-left: .5rem;
+  color: var(--muted);
+  opacity: .5;
+}

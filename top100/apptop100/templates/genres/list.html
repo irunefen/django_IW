@@ -10,14 +10,18 @@
 </section>
 
 <section class="grid cols-4">
-  {% for i in "12345678" %}
+  {% for estilo in genres %}
   <article class="card">
     <div class="badge">Estilo</div>
-    <h3 class="title" style="font-size:1.1rem;">Rock (provisional)</h3>
-    <p class="muted">Descripción breve del estilo.</p>
+    <h3 class="title card-title-md">{{ estilo.nombre }}</h3>
+    <p class="muted">{{ estilo.descripcion|default:"Sin descripción"|truncatewords:15 }}</p>
     <div class="row">
-      <a class="btn" href="{% url 'genres:detail' slug='rock' %}">Ver estilo</a>
+      <a class="btn" href="{% url 'genres:detail' slug=estilo.nombre|slugify %}">Ver estilo</a>
     </div>
+  </article>
+  {% empty %}
+  <article class="card">
+    <p class="muted">No hay estilos disponibles.</p>
   </article>
   {% endfor %}
 </section>
