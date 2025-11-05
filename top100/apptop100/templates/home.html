@@ -18,7 +18,7 @@
   {% for estilo, cancion in destacados %}
   <article class="card">
     <div class="badge">Estilo: <strong>{{ estilo.nombre }}</strong></div>
-    <div class="cover" aria-label="Carátula de {{ cancion.nombre|default:'canción destacada' }}">
+    <div class="cover">
       {% if cancion.album.imagen %}
       <img src="{{ cancion.album.imagen }}" alt="Carátula de {{ cancion.album.titulo }}" loading="lazy">
       {% endif %}

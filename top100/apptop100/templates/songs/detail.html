@@ -11,7 +11,7 @@
 
 <section class="grid cols-2 section">
   <div class="card">
-    <div class="cover cover-wide" aria-label="Carátula de {{ song.nombre }}">
+    <div class="cover cover-wide">
       {% if song.album.imagen %}
       <img src="{{ song.album.imagen }}" alt="Carátula de {{ song.album.titulo }}" loading="lazy">
       {% endif %}
