@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Detalle de estilo · Top 100{% endblock %}
+{% block nav_genres %}active{% endblock %}
+
+{% block content %}
+<nav class="breadcrumbs section">
+  <a href="{% url 'home' %}">Inicio</a> 
+  <a href="{% url 'genres:list' %}">Estilos</a> 
+  <span>Detalle</span>
+</nav>
+
+<section class="grid cols-2 section">
+  <article class="card">
+    <div class="kicker">Estilo</div>
+    <h1 class="title">Rock (provisional)</h1>
+    <p class="muted">Descripción completa del estilo, orígenes, subgéneros, etc.</p>
+    <div class="chips" style="margin-top:.75rem;">
+      <span class="chip">Canciones: 42</span>
+      <span class="chip">Intérpretes: 15</span>
+    </div>
+  </article>
+
+  <article class="card soft">
+    <h3 class="title" style="font-size:1.05rem;">Canción destacada</h3>
+    <p class="muted">La canción mejor posicionada en el ranking para este estilo.</p>
+    <div class="row">
+      <a class="btn" href="{% url 'songs:detail' pk=1 %}">Ver canción</a>
+    </div>
+  </article>
+</section>
+
+<section class="section card">
+  <h2 class="title" style="font-size:1.2rem;">Todas las canciones del estilo</h2>
+  <table class="table">
+    <thead><tr><th>#</th><th>Título</th><th>Intérpretes</th></tr></thead>
+    <tbody>
+      {% for i in "123456" %}
+      <tr>
+        <td class="rank">#{{ forloop.counter }}</td>
+        <td><a href="{% url 'songs:detail' pk=forloop.counter %}">Canción {{ forloop.counter }}</a></td>
+        <td class="muted">Artista X</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

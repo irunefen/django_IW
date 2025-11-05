@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Detalle de intérprete · Top 100{% endblock %}
+{% block nav_artists %}active{% endblock %}
+
+{% block content %}
+<nav class="breadcrumbs section">
+  <a href="{% url 'home' %}">Inicio</a> 
+  <a href="{% url 'artists:list' %}">Intérpretes</a> 
+  <span>Detalle</span>
+</nav>
+
+<section class="grid cols-2 section">
+  <div class="card">
+    <div class="cover" aria-label="Foto del intérprete (provisional)"></div>
+  </div>
+  <div class="card">
+    <div class="kicker">Intérprete</div>
+    <h1 class="title">Nombre del Intérprete (provisional)</h1>
+    <p class="muted">Biografía o descripción corta.</p>
+    <div class="chips">
+      <span class="chip">Tipo: Grupo</span>
+      <span class="chip">Origen: —</span>
+    </div>
+    <div class="row" style="margin-top:1rem;">
+      <a class="btn ghost" href="{% url 'artists:list' %}">Volver</a>
+    </div>
+  </div>
+</section>
+
+<section class="section card">
+  <h2 class="title" style="font-size:1.2rem;">Canciones del intérprete</h2>
+  <table class="table">
+    <thead><tr><th>#</th><th>Título</th><th>Estilo</th></tr></thead>
+    <tbody>
+      {% for i in "123456" %}
+      <tr>
+        <td class="rank">#{{ forloop.counter }}</td>
+        <td><a href="{% url 'songs:detail' pk=forloop.counter %}">Canción {{ forloop.counter }}</a></td>
+        <td><a href="{% url 'genres:detail' slug='pop' %}" class="badge">Pop</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

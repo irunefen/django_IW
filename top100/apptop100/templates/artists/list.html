@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Intérpretes · Top 100{% endblock %}
+{% block nav_artists %}active{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="kicker">Intérpretes</div>
+  <h1 class="title">Solistas y grupos</h1>
+  <p class="muted">Lista disponible de interpretes.</p>
+</section>
+
+<section class="grid cols-4">
+  {% for i in "12345678" %}
+  <article class="card">
+    <div class="cover" aria-hidden="true"></div>
+    <h3 class="title" style="font-size:1.05rem; margin:.6rem 0 .2rem;">Nombre del Intérprete</h3>
+    <div class="chips">
+      <span class="chip">Tipo: Solista</span>
+      <span class="chip">Canciones: 12</span>
+    </div>
+    <div class="row" style="margin-top:.6rem;">
+      <a class="btn" href="{% url 'artists:detail' slug='interprete' %}">Ver intérprete</a>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Detalle de canción · Top 100{% endblock %}
+{% block nav_songs %}active{% endblock %}
+
+{% block content %}
+<nav class="breadcrumbs section">
+  <a href="{% url 'home' %}">Inicio</a>
+  <a href="{% url 'songs:list' %}">Canciones</a>
+  <span>Detalle</span>
+</nav>
+
+<section class="grid cols-2 section">
+  <div class="card">
+    <div class="cover" aria-label="Carátula (provisional)"></div>
+  </div>
+  <div class="card">
+    <div class="kicker">Canción</div>
+    <h1 class="title">Título de Canción (provisional)</h1>
+    <p class="muted">Aquí irá la descripción o metadatos.</p>
+    <p>Estilo: <a class="badge" href="{% url 'genres:detail' slug='pop' %}">Pop</a></p>
+    <p>Intérpretes:</p>
+    <div class="chips">
+      <a class="chip" href="{% url 'artists:detail' slug='artista-x' %}">Artista X</a>
+      <a class="chip" href="{% url 'artists:detail' slug='artista-y' %}">Artista Y</a>
+    </div>
+    <p style="margin-top:1rem;">
+      Ranking actual: <span class="rank">#3</span>
+    </p>
+    <div class="row" style="margin-top:1rem;">
+      <button class="btn" type="button" disabled>Reproducir (demo)</button>
+      <a class="btn ghost" href="{% url 'songs:list' %}">Volver al listado</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

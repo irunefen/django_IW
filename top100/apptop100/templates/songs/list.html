@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Canciones · Top 100{% endblock %}
+{% block nav_songs %}active{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="row">
+    <div class="grow">
+      <div class="kicker">Listado</div>
+      <h1 class="title">Todas las canciones</h1>
+      <p class="muted">Haz clic en una fila para ver los detalles.</p>
+    </div>
+    <div class="chips">
+      <span class="chip">Orden: Popularidad</span>
+      <span class="chip">Filtro: Ninguno</span>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <table class="table" role="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Título</th>
+        <th>Estilo</th>
+        <th>Intérpretes</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% comment %} Iterar canciones reales aquí {% endcomment %}
+      {% for i in "123456789" %}
+      <tr>
+        <td><span class="rank">#{{ forloop.counter }}</span></td>
+        <td><a href="{% url 'songs:detail' pk=forloop.counter %}">Título de Canción</a></td>
+        <td><a href="{% url 'genres:detail' slug='rock' %}" class="badge">Rock</a></td>
+        <td class="muted">Intérprete A, Intérprete B</td>
+        <td><a class="btn ghost" href="{% url 'songs:detail' pk=forloop.counter %}">Ver</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+{% include "includes/_pagination.html" %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Estilos musicales · Top 100{% endblock %}
+{% block nav_genres %}active{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="kicker">Explora</div>
+  <h1 class="title">Estilos musicales</h1>
+  <p class="muted">Selecciona un estilo para ver sus canciones.</p>
+</section>
+
+<section class="grid cols-4">
+  {% for i in "12345678" %}
+  <article class="card">
+    <div class="badge">Estilo</div>
+    <h3 class="title" style="font-size:1.1rem;">Rock (provisional)</h3>
+    <p class="muted">Descripción breve del estilo.</p>
+    <div class="row">
+      <a class="btn" href="{% url 'genres:detail' slug='rock' %}">Ver estilo</a>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% endblock %}

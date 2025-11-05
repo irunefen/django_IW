@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Inicio · Top 100{% endblock %}
+{% block nav_home %}active{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="row">
+    <div class="grow">
+      <div class="kicker">Bienvenido</div>
+      <h1 class="title">Top 100 — Lo más escuchado por estilo</h1>
+      <p class="muted">Se muestra una canción destacada por cada estilo musical</p>
+    </div>
+    <a class="btn" href="{% url 'songs:list' %}">Ver todas las canciones</a>
+  </div>
+</section>
+
+<section class="section grid cols-3">
+  <!-- Tarjetas por estilo (placeholder) -->
+  {% comment %} Reemplazar este bloque con un loop de estilos y su canción top {% endcomment %}
+  {% for i in "123456" %}
+  <article class="card">
+    <div class="badge">Estilo: <strong>Pop</strong></div>
+    <div class="cover" aria-hidden="true"></div>
+    <h3 class="title" style="font-size:1.15rem; margin:.6rem 0 .2rem;">Canción destacada (placeholder)</h3>
+    <div class="muted">Intérprete · <span class="rank">#1</span> en el ranking de Pop</div>
+    <div class="row" style="margin-top:.8rem;">
+      <a class="btn ghost" href="{% url 'genres:detail' slug='pop' %}">Ver estilo</a>
+      <a class="btn" href="{% url 'songs:detail' pk=1 %}">Ver canción</a>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+
+{% include "includes/_pagination.html" %}
+{% endblock %}
