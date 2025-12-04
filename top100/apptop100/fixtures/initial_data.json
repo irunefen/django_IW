@@ -1,0 +1,464 @@
+[
+  {
+    "model": "apptop100.estilo",
+    "pk": 1,
+    "fields": {
+      "nombre": "Pop",
+      "descripcion": "Género musical popular caracterizado por melodías pegadizas y estructuras simples."
+    }
+  },
+  {
+    "model": "apptop100.estilo",
+    "pk": 2,
+    "fields": {
+      "nombre": "Rock",
+      "descripcion": "Género musical originado en los años 50, caracterizado por guitarras eléctricas y ritmos potentes."
+    }
+  },
+  {
+    "model": "apptop100.estilo",
+    "pk": 3,
+    "fields": {
+      "nombre": "Hip Hop",
+      "descripcion": "Género musical urbano que incluye rap, beats y cultura callejera."
+    }
+  },
+  {
+    "model": "apptop100.estilo",
+    "pk": 4,
+    "fields": {
+      "nombre": "Electrónica",
+      "descripcion": "Música producida principalmente con instrumentos electrónicos y sintetizadores."
+    }
+  },
+  {
+    "model": "apptop100.estilo",
+    "pk": 5,
+    "fields": {
+      "nombre": "Reggaetón",
+      "descripcion": "Género musical latino con influencias del reggae, hip hop y música caribeña."
+    }
+  },
+  {
+    "model": "apptop100.estilo",
+    "pk": 6,
+    "fields": {
+      "nombre": "Indie",
+      "descripcion": "Música independiente caracterizada por su producción alternativa y sonidos experimentales."
+    }
+  },
+  {
+    "model": "apptop100.artista",
+    "pk": 1,
+    "fields": {
+      "nombre": "Taylor Swift",
+      "fecha_nacimiento": "1989-12-13",
+      "followers": 85000000,
+      "imagen": "https://i.scdn.co/image/ab6761610000e5eb859e4c14fa59296c8649e0e4",
+      "popularidad": 98,
+      "nacionalidad": "Estados Unidos"
+    }
+  },
+  {
+    "model": "apptop100.artista",
+    "pk": 2,
+    "fields": {
+      "nombre": "Bad Bunny",
+      "fecha_nacimiento": "1994-03-10",
+      "followers": 72000000,
+      "imagen": "https://static.wikia.nocookie.net/kong/images/e/e3/Bad_Bunny.jpg/revision/latest?cb=20220902162840",
+      "popularidad": 96,
+      "nacionalidad": "Puerto Rico"
+    }
+  },
+  {
+    "model": "apptop100.artista",
+    "pk": 3,
+    "fields": {
+      "nombre": "The Weeknd",
+      "fecha_nacimiento": "1990-02-16",
+      "followers": 68000000,
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/The_Weeknd_Portrait_by_Brian_Ziff.jpg/440px-The_Weeknd_Portrait_by_Brian_Ziff.jpg",
+      "popularidad": 94,
+      "nacionalidad": "Canadá"
+    }
+  },
+  {
+    "model": "apptop100.artista",
+    "pk": 4,
+    "fields": {
+      "nombre": "Coldplay",
+      "fecha_nacimiento": null,
+      "followers": 55000000,
+      "imagen": "https://i.scdn.co/image/ab6761610000e5eb989ed05e1f0570cc4726c2d3",
+      "popularidad": 90,
+      "nacionalidad": "Reino Unido"
+    }
+  },
+  {
+    "model": "apptop100.artista",
+    "pk": 5,
+    "fields": {
+      "nombre": "Daft Punk",
+      "fecha_nacimiento": null,
+      "followers": 25000000,
+      "imagen": "https://i.scdn.co/image/ab6761610000e5eba7bfd7835b5c1eee0c95fa6e",
+      "popularidad": 82,
+      "nacionalidad": "Francia"
+    }
+  },
+  {
+    "model": "apptop100.artista",
+    "pk": 6,
+    "fields": {
+      "nombre": "Kendrick Lamar",
+      "fecha_nacimiento": "1987-06-17",
+      "followers": 42000000,
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Pulitzer2018-portraits-kendrick-lamar.jpg/440px-Pulitzer2018-portraits-kendrick-lamar.jpg",
+      "popularidad": 91,
+      "nacionalidad": "Estados Unidos"
+    }
+  },
+  {
+    "model": "apptop100.artista",
+    "pk": 7,
+    "fields": {
+      "nombre": "Arctic Monkeys",
+      "fecha_nacimiento": null,
+      "followers": 28000000,
+      "imagen": "https://i.scdn.co/image/ab6761610000e5eb7da39dea0a72f581535fb11f",
+      "popularidad": 85,
+      "nacionalidad": "Reino Unido"
+    }
+  },
+  {
+    "model": "apptop100.artista",
+    "pk": 8,
+    "fields": {
+      "nombre": "Billie Eilish",
+      "fecha_nacimiento": "2001-12-18",
+      "followers": 62000000,
+      "imagen": "https://i.scdn.co/image/ab6761610000e5eb4a21b4760d2ecb7b0dcdc8da",
+      "popularidad": 93,
+      "nacionalidad": "Estados Unidos"
+    }
+  },
+  {
+    "model": "apptop100.album",
+    "pk": 1,
+    "fields": {
+      "titulo": "1989 (Taylor's Version)",
+      "artistas": [1],
+      "fecha_lanzamiento": "2023-10-27",
+      "total_canciones": 21,
+      "imagen": "https://i.scdn.co/image/ab67616d0000b273904445d70d04eb24d6bb79ac"
+    }
+  },
+  {
+    "model": "apptop100.album",
+    "pk": 2,
+    "fields": {
+      "titulo": "Un Verano Sin Ti",
+      "artistas": [2],
+      "fecha_lanzamiento": "2022-05-06",
+      "total_canciones": 23,
+      "imagen": "https://i.scdn.co/image/ab67616d0000b27349d694203245f241a1bcaa72"
+    }
+  },
+  {
+    "model": "apptop100.album",
+    "pk": 3,
+    "fields": {
+      "titulo": "After Hours",
+      "artistas": [3],
+      "fecha_lanzamiento": "2020-03-20",
+      "total_canciones": 14,
+      "imagen": "https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36"
+    }
+  },
+  {
+    "model": "apptop100.album",
+    "pk": 4,
+    "fields": {
+      "titulo": "Music of the Spheres",
+      "artistas": [4],
+      "fecha_lanzamiento": "2021-10-15",
+      "total_canciones": 12,
+      "imagen": "https://i.scdn.co/image/ab67616d0000b273ec10f247b100da1ce0d80b6d"
+    }
+  },
+  {
+    "model": "apptop100.album",
+    "pk": 5,
+    "fields": {
+      "titulo": "Random Access Memories",
+      "artistas": [5],
+      "fecha_lanzamiento": "2013-05-17",
+      "total_canciones": 13,
+      "imagen": "https://i.scdn.co/image/ab67616d0000b2739b9b36b0e22870b9f542d937"
+    }
+  },
+  {
+    "model": "apptop100.album",
+    "pk": 6,
+    "fields": {
+      "titulo": "DAMN.",
+      "artistas": [6],
+      "fecha_lanzamiento": "2017-04-14",
+      "total_canciones": 14,
+      "imagen": "https://i.scdn.co/image/ab67616d0000b2738b52c6b9bc4e43d873869699"
+    }
+  },
+  {
+    "model": "apptop100.album",
+    "pk": 7,
+    "fields": {
+      "titulo": "AM",
+      "artistas": [7],
+      "fecha_lanzamiento": "2013-09-09",
+      "total_canciones": 12,
+      "imagen": "https://upload.wikimedia.org/wikipedia/en/0/04/Arctic_Monkeys_-_AM.png"
+    }
+  },
+  {
+    "model": "apptop100.album",
+    "pk": 8,
+    "fields": {
+      "titulo": "Happier Than Ever",
+      "artistas": [8],
+      "fecha_lanzamiento": "2021-07-30",
+      "total_canciones": 16,
+      "imagen": "https://i.scdn.co/image/ab67616d0000b2732a038d3bf875d23e4aeaa84e"
+    }
+  },
+  {
+    "model": "apptop100.album",
+    "pk": 9,
+    "fields": {
+      "titulo": "Parachutes",
+      "artistas": [4],
+      "fecha_lanzamiento": "2000-07-10",
+      "total_canciones": 10,
+      "imagen": "https://i.scdn.co/image/ab67616d0000b2739164bafe9aaa168d93f4816a"
+    }
+  },
+  {
+    "model": "apptop100.album",
+    "pk": 10,
+    "fields": {
+      "titulo": "When We All Fall Asleep, Where Do We Go?",
+      "artistas": [8],
+      "fecha_lanzamiento": "2019-03-29",
+      "total_canciones": 14,
+      "imagen": "https://i.scdn.co/image/ab67616d0000b27350a3147b4edd7701a876c6ce"
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 1,
+    "fields": {
+      "nombre": "Shake It Off",
+      "artistas": [1],
+      "estilo": 1,
+      "reproducciones": 1500000000,
+      "duracion": 219,
+      "fecha_lanzamiento": "2014-08-18",
+      "album": 1
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 2,
+    "fields": {
+      "nombre": "Blank Space",
+      "artistas": [1],
+      "estilo": 1,
+      "reproducciones": 1400000000,
+      "duracion": 231,
+      "fecha_lanzamiento": "2014-11-10",
+      "album": 1
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 3,
+    "fields": {
+      "nombre": "Tití Me Preguntó",
+      "artistas": [2],
+      "estilo": 5,
+      "reproducciones": 1200000000,
+      "duracion": 244,
+      "fecha_lanzamiento": "2022-05-06",
+      "album": 2
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 4,
+    "fields": {
+      "nombre": "Me Porto Bonito",
+      "artistas": [2],
+      "estilo": 5,
+      "reproducciones": 1100000000,
+      "duracion": 178,
+      "fecha_lanzamiento": "2022-05-06",
+      "album": 2
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 5,
+    "fields": {
+      "nombre": "Blinding Lights",
+      "artistas": [3],
+      "estilo": 1,
+      "reproducciones": 4000000000,
+      "duracion": 200,
+      "fecha_lanzamiento": "2019-11-29",
+      "album": 3
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 6,
+    "fields": {
+      "nombre": "Save Your Tears",
+      "artistas": [3],
+      "estilo": 1,
+      "reproducciones": 2500000000,
+      "duracion": 215,
+      "fecha_lanzamiento": "2020-08-09",
+      "album": 3
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 7,
+    "fields": {
+      "nombre": "Yellow",
+      "artistas": [4],
+      "estilo": 2,
+      "reproducciones": 1800000000,
+      "duracion": 269,
+      "fecha_lanzamiento": "2000-06-26",
+      "album": 9
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 8,
+    "fields": {
+      "nombre": "My Universe",
+      "artistas": [4],
+      "estilo": 1,
+      "reproducciones": 1200000000,
+      "duracion": 228,
+      "fecha_lanzamiento": "2021-09-24",
+      "album": 4
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 9,
+    "fields": {
+      "nombre": "Get Lucky",
+      "artistas": [5],
+      "estilo": 4,
+      "reproducciones": 1300000000,
+      "duracion": 369,
+      "fecha_lanzamiento": "2013-04-19",
+      "album": 5
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 10,
+    "fields": {
+      "nombre": "Instant Crush",
+      "artistas": [5],
+      "estilo": 4,
+      "reproducciones": 600000000,
+      "duracion": 337,
+      "fecha_lanzamiento": "2013-05-17",
+      "album": 5
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 11,
+    "fields": {
+      "nombre": "HUMBLE.",
+      "artistas": [6],
+      "estilo": 3,
+      "reproducciones": 1900000000,
+      "duracion": 177,
+      "fecha_lanzamiento": "2017-03-30",
+      "album": 6
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 12,
+    "fields": {
+      "nombre": "DNA.",
+      "artistas": [6],
+      "estilo": 3,
+      "reproducciones": 1100000000,
+      "duracion": 185,
+      "fecha_lanzamiento": "2017-04-14",
+      "album": 6
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 13,
+    "fields": {
+      "nombre": "Do I Wanna Know?",
+      "artistas": [7],
+      "estilo": 6,
+      "reproducciones": 1600000000,
+      "duracion": 272,
+      "fecha_lanzamiento": "2013-06-18",
+      "album": 7
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 14,
+    "fields": {
+      "nombre": "R U Mine?",
+      "artistas": [7],
+      "estilo": 6,
+      "reproducciones": 800000000,
+      "duracion": 203,
+      "fecha_lanzamiento": "2012-02-27",
+      "album": 7
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 15,
+    "fields": {
+      "nombre": "Happier Than Ever",
+      "artistas": [8],
+      "estilo": 6,
+      "reproducciones": 1000000000,
+      "duracion": 298,
+      "fecha_lanzamiento": "2021-07-30",
+      "album": 8
+    }
+  },
+  {
+    "model": "apptop100.cancion",
+    "pk": 16,
+    "fields": {
+      "nombre": "Bad Guy",
+      "artistas": [8],
+      "estilo": 1,
+      "reproducciones": 2300000000,
+      "duracion": 194,
+      "fecha_lanzamiento": "2019-03-29",
+      "album": 10
+    }
+  }
+]

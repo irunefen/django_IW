@@ -14,7 +14,7 @@
   {% for artista in artists %}
   <article class="card">
     <div class="cover">
-      {% if artista.imagen %}aria-label attribute cannot be used on a div with no valid role attribute
+      {% if artista.imagen %}
       <img src="{{ artista.imagen }}" alt="{{ artista.nombre }}" loading="lazy">
       {% endif %}
     </div>
