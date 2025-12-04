@@ -27,7 +27,7 @@ def index_estilos(request):
 
 def show_estilo(request, pk):
     estilo = get_object_or_404(Estilo, pk=pk)
-    canciones = estilo.cancion_set.order_by('-reproducciones')
+    canciones = estilo.canciones.order_by('-reproducciones')
     context = {"genre": estilo, "songs": canciones}
     return render(request, "genres/detail.html", context)
 
