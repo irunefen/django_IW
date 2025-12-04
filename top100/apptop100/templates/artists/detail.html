@@ -43,7 +43,7 @@
       <tr>
         <td class="rank">#{{ forloop.counter }}</td>
         <td><a href="{% url 'songs:detail' pk=cancion.pk %}">{{ cancion.nombre }}</a></td>
-        <td><a href="{% url 'genres:detail' slug=cancion.estilo.nombre|slugify %}" class="badge">{{ cancion.estilo.nombre }}</a></td>
+        <td><a href="{% url 'genres:detail' pk=cancion.estilo.pk %}" class="badge">{{ cancion.estilo.nombre }}</a></td>
       </tr>
       {% empty %}
       <tr>

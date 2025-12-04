@@ -24,7 +24,7 @@
       <span class="chip">Canciones: {{ artista.canciones.count }}</span>
     </div>
     <div class="row mt-sm">
-      <a class="btn" href="{% url 'artists:detail' slug=artista.nombre|slugify %}">Ver intérprete</a>
+      <a class="btn" href="{% url 'artists:detail' pk=artista.pk %}">Ver intérprete</a>
     </div>
   </article>
   {% empty %}

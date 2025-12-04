@@ -9,12 +9,12 @@ songs_patterns = ([
 
 genres_patterns = ([
     path('', views.index_estilos, name='list'),
-    path('<slug:slug>/', views.show_estilo, name='detail'),
+    path('<int:pk>/', views.show_estilo, name='detail'),
 ], 'genres')
 
 artists_patterns = ([
     path('', views.index_artistas, name='list'),
-    path('<slug:slug>/', views.show_artista, name='detail'),
+    path('<int:pk>/', views.show_artista, name='detail'),
 ], 'artists')
 
 

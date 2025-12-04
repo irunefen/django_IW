@@ -17,7 +17,7 @@
     <h3 class="title card-title-md">{{ estilo.nombre }}</h3>
     <p class="muted">{{ estilo.descripcion|default:"Sin descripción"|truncatewords:15 }}</p>
     <div class="row">
-      <a class="btn" href="{% url 'genres:detail' slug=estilo.nombre|slugify %}">Ver estilo</a>
+      <a class="btn" href="{% url 'genres:detail' pk=estilo.pk %}">Ver estilo</a>
     </div>
   </article>
   {% empty %}

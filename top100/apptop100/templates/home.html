@@ -31,14 +31,14 @@
       · <span class="rank">#1</span> en el ranking de {{ estilo.nombre }}
     </div>
     <div class="row mt-base">
-      <a class="btn ghost" href="{% url 'genres:detail' slug=estilo.nombre|slugify %}">Ver estilo</a>
+      <a class="btn ghost" href="{% url 'genres:detail' pk=estilo.pk %}">Ver estilo</a>
       <a class="btn" href="{% url 'songs:detail' pk=cancion.pk %}">Ver canción</a>
     </div>
     {% else %}
     <h3 class="title card-title-lg">Sin canciones</h3>
     <div class="muted">No hay canciones disponibles para este estilo.</div>
     <div class="row mt-base">
-      <a class="btn ghost" href="{% url 'genres:detail' slug=estilo.nombre|slugify %}">Ver estilo</a>
+      <a class="btn ghost" href="{% url 'genres:detail' pk=estilo.pk %}">Ver estilo</a>
     </div>
     {% endif %}
   </article>

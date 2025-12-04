@@ -22,11 +22,11 @@
     <div class="kicker">Canción</div>
     <h1 class="title">{{ song.nombre }}</h1>
     <p class="muted">Reproducciones: {{ song.reproducciones|default:"0" }} · Duración: {{ song.duracion|default:"0" }}s</p>
-    <p>Estilo: <a class="badge" href="{% url 'genres:detail' slug=song.estilo.nombre|slugify %}">{{ song.estilo.nombre }}</a></p>
+    <p>Estilo: <a class="badge" href="{% url 'genres:detail' pk=song.estilo.pk %}">{{ song.estilo.nombre }}</a></p>
     <p>Intérpretes:</p>
     <div class="chips">
       {% for artista in song.artistas.all %}
-      <a class="chip" href="{% url 'artists:detail' slug=artista.nombre|slugify %}">{{ artista.nombre }}</a>
+      <a class="chip" href="{% url 'artists:detail' pk=artista.pk %}">{{ artista.nombre }}</a>
       {% empty %}
       <span class="chip">Sin artistas</span>
       {% endfor %}

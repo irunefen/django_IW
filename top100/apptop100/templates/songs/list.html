@@ -35,7 +35,7 @@
         <tr>
           <td><span class="rank">#{{ forloop.counter }}</span></td>
           <td><a href="{% url 'songs:detail' pk=cancion.pk %}">{{ cancion.nombre }}</a></td>
-          <td><a href="{% url 'genres:detail' slug=cancion.estilo.nombre|slugify %}" class="badge">{{ cancion.estilo.nombre }}</a></td>
+          <td><a href="{% url 'genres:detail' pk=cancion.estilo.pk %}" class="badge">{{ cancion.estilo.nombre }}</a></td>
           <td class="muted">{% for artista in cancion.artistas.all %}{{ artista.nombre }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
           <td><a class="btn ghost" href="{% url 'songs:detail' pk=cancion.pk %}">Ver</a></td>
         </tr>
