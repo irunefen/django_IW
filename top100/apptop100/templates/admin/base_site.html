@@ -1,0 +1,20 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}Top 100 · Administración{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}?v=2">
+{% endblock %}
+
+{% block branding %}
+<div class="brand">
+  <span class="brand-mark">Top 100</span>
+  <span class="brand-tagline">Panel editorial</span>
+</div>
+{% endblock %}
+
+{% block nav-global %}
+<a href="{% url 'home' %}" class="brand-link">← Ir al sitio público</a>
+{% endblock %}
