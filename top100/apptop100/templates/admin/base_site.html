@@ -1,7 +1,7 @@
 {% extends "admin/base.html" %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}Top 100 · Administración{% endblock %}
+{% block title %}{% trans "Top 100 · Administración" %}{% endblock %}
 
 {% block extrastyle %}
 {{ block.super }}
@@ -10,11 +10,11 @@
 
 {% block branding %}
 <div class="brand">
-  <span class="brand-mark">Top 100</span>
-  <span class="brand-tagline">Panel editorial</span>
+  <span class="brand-mark">{% trans "Top 100" %}</span>
+  <span class="brand-tagline">{% trans "Panel editorial" %}</span>
 </div>
 {% endblock %}
 
 {% block nav-global %}
-<a href="{% url 'home' %}" class="brand-link">← Ir al sitio público</a>
+<a href="{% url 'home' %}" class="brand-link">← {% trans "Ir al sitio público" %}</a>
 {% endblock %}

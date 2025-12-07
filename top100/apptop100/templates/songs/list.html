@@ -1,19 +1,26 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
-{% block title %}Canciones · Top 100{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Canciones · Top 100" %}{% endblock %}
 {% block nav_songs %}active{% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="row">
     <div class="grow">
-      <div class="kicker">Listado</div>
-      <h1 class="title">Todas las canciones</h1>
-      <p class="muted">Haz clic en una fila para ver los detalles.</p>
+      <div class="kicker">{% trans "Listado" %}</div>
+      <h1 class="title">{% trans "Todas las canciones" %}</h1>
+      <p class="muted">
+        {% trans "Haz clic en una fila para ver los detalles." %}
+      </p>
     </div>
     <div class="chips">
-      <span class="chip">Orden: Popularidad</span>
-      <span class="chip">Filtro: Ninguno</span>
+      <span class="chip">
+        {% trans "Orden: Popularidad" %}
+      </span>
+      <span class="chip">
+        {% trans "Filtro: Ninguno" %}
+      </span>
     </div>
   </div>
 </section>
@@ -24,29 +31,48 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Título</th>
-          <th>Estilo</th>
-          <th>Intérpretes</th>
-          <th>Acciones</th>
+          <th>{% trans "Título" %}</th>
+          <th>{% trans "Estilo" %}</th>
+          <th>{% trans "Intérpretes" %}</th>
+          <th>{% trans "Acciones" %}</th>
         </tr>
       </thead>
       <tbody>
         {% for cancion in songs %}
         <tr>
           <td><span class="rank">#{{ forloop.counter }}</span></td>
-          <td><a href="{% url 'songs:detail' pk=cancion.pk %}">{{ cancion.nombre }}</a></td>
-          <td><a href="{% url 'genres:detail' pk=cancion.estilo.pk %}" class="badge">{{ cancion.estilo.nombre }}</a></td>
-          <td class="muted">{% for artista in cancion.artistas.all %}{{ artista.nombre }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
-          <td><a class="btn ghost" href="{% url 'songs:detail' pk=cancion.pk %}">Ver</a></td>
+          <td>
+            <a href="{% url 'songs:detail' pk=cancion.pk %}">
+              {{ cancion.nombre }}
+            </a>
+          </td>
+          <td>
+            <a href="{% url 'genres:detail' pk=cancion.estilo.pk %}" class="badge">
+              {{ cancion.estilo.nombre }}
+            </a>
+          </td>
+          <td class="muted">
+            {% for artista in cancion.artistas.all %}
+              {{ artista.nombre }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </td>
+          <td>
+            <a class="btn ghost" href="{% url 'songs:detail' pk=cancion.pk %}">
+              {% trans "Ver" %}
+            </a>
+          </td>
         </tr>
         {% empty %}
         <tr>
-          <td colspan="5" class="table-empty">No hay canciones disponibles.</td>
+          <td colspan="5" class="table-empty">
+            {% trans "No hay canciones disponibles." %}
+          </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </article>
 </section>
+
 {% include "includes/_pagination.html" %}
 {% endblock %}

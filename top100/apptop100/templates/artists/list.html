@@ -1,13 +1,16 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
-{% block title %}Intérpretes · Top 100{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Intérpretes · Top 100" %}{% endblock %}
 {% block nav_artists %}active{% endblock %}
 
 {% block content %}
 <section class="section">
-  <div class="kicker">Intérpretes</div>
-  <h1 class="title">Solistas y grupos</h1>
-  <p class="muted">Lista disponible de interpretes.</p>
+  <div class="kicker">{% trans "Intérpretes" %}</div>
+  <h1 class="title">{% trans "Solistas y grupos" %}</h1>
+  <p class="muted">
+    {% trans "Lista disponible de intérpretes." %}
+  </p>
 </section>
 
 <section class="grid cols-4">
@@ -20,16 +23,28 @@
     </div>
     <h3 class="title card-title-sm">{{ artista.nombre }}</h3>
     <div class="chips">
-      <span class="chip">Followers: {{ artista.followers|default:"0" }}</span>
-      <span class="chip">Canciones: {{ artista.canciones.count }}</span>
+      <span class="chip">
+        {% blocktrans with followers=artista.followers|default:"0" %}
+        Followers: {{ followers }}
+        {% endblocktrans %}
+      </span>
+      <span class="chip">
+        {% blocktrans with count=artista.canciones.count %}
+        Canciones: {{ count }}
+        {% endblocktrans %}
+      </span>
     </div>
     <div class="row mt-sm">
-      <a class="btn" href="{% url 'artists:detail' pk=artista.pk %}">Ver intérprete</a>
+      <a class="btn" href="{% url 'artists:detail' pk=artista.pk %}">
+        {% trans "Ver intérprete" %}
+      </a>
     </div>
   </article>
   {% empty %}
   <article class="card">
-    <p class="muted">No hay artistas disponibles.</p>
+    <p class="muted">
+      {% trans "No hay artistas disponibles." %}
+    </p>
   </article>
   {% endfor %}
 </section>

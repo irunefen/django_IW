@@ -1,13 +1,14 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
-{% block title %}Detalle de intérprete · Top 100{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Detalle de intérprete · Top 100" %}{% endblock %}
 {% block nav_artists %}active{% endblock %}
 
 {% block content %}
 <nav class="breadcrumbs section">
-  <a href="{% url 'home' %}">Inicio</a> 
-  <a href="{% url 'artists:list' %}">Intérpretes</a> 
-  <span>Detalle</span>
+  <a href="{% url 'home' %}">{% trans "Inicio" %}</a>
+  <a href="{% url 'artists:list' %}">{% trans "Intérpretes" %}</a>
+  <span>{% trans "Detalle" %}</span>
 </nav>
 
 <section class="grid cols-2 section">
@@ -19,35 +20,57 @@
     </div>
   </div>
   <div class="card">
-    <div class="kicker">Intérprete</div>
+    <div class="kicker">{% trans "Intérprete" %}</div>
     <h1 class="title">{{ artist.nombre }}</h1>
-    <p class="muted">Popularidad: {{ artist.popularidad|default:"0" }} · Followers: {{ artist.followers|default:"0" }}</p>
+    <p class="muted">
+      {% blocktrans with popularity=artist.popularidad|default:"0" followers=artist.followers|default:"0" %}
+      Popularidad: {{ popularity }} · Followers: {{ followers }}
+      {% endblocktrans %}
+    </p>
     <div class="chips">
       {% if artist.nacionalidad %}
-      <span class="chip">Origen: {{ artist.nacionalidad }}</span>
+      <span class="chip">
+        {% trans "Origen:" %} {{ artist.nacionalidad }}
+      </span>
       {% endif %}
-      <span class="chip">Canciones: {{ songs.count }}</span>
+      <span class="chip">
+        {% trans "Canciones:" %} {{ songs.count }}
+      </span>
     </div>
     <div class="row mt-lg">
-      <a class="btn ghost" href="{% url 'artists:list' %}">Volver</a>
+      <a class="btn ghost" href="{% url 'artists:list' %}">{% trans "Volver" %}</a>
     </div>
   </div>
 </section>
 
 <section class="section card">
-  <h2 class="title section-title">Canciones del intérprete</h2>
+  <h2 class="title section-title">{% trans "Canciones del intérprete" %}</h2>
   <table class="table">
-    <thead><tr><th>#</th><th>Título</th><th>Estilo</th></tr></thead>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>{% trans "Título" %}</th>
+        <th>{% trans "Estilo" %}</th>
+      </tr>
+    </thead>
     <tbody>
       {% for cancion in songs %}
       <tr>
         <td class="rank">#{{ forloop.counter }}</td>
-        <td><a href="{% url 'songs:detail' pk=cancion.pk %}">{{ cancion.nombre }}</a></td>
-        <td><a href="{% url 'genres:detail' pk=cancion.estilo.pk %}" class="badge">{{ cancion.estilo.nombre }}</a></td>
+        <td>
+          <a href="{% url 'songs:detail' pk=cancion.pk %}">{{ cancion.nombre }}</a>
+        </td>
+        <td>
+          <a href="{% url 'genres:detail' pk=cancion.estilo.pk %}" class="badge">
+            {{ cancion.estilo.nombre }}
+          </a>
+        </td>
       </tr>
       {% empty %}
       <tr>
-        <td colspan="3" class="table-empty">Este artista no tiene canciones.</td>
+        <td colspan="3" class="table-empty">
+          {% trans "Este artista no tiene canciones." %}
+        </td>
       </tr>
       {% endfor %}
     </tbody>

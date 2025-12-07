@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-{% load static %}
-<html lang="es" class="no-js" data-theme="light">
+{% load static i18n %}
+<html lang="{{ request.LANGUAGE_CODE|default:'es' }}" class="no-js" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{% block title %}Top 100{% endblock %}</title>
+  <title>{% block title %}{% trans "Top 100" %}{% endblock %}</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
@@ -17,17 +18,32 @@
     <div class="container nav-inner">
       <div class="brand">
         <span class="brand-dot" aria-hidden="true"></span>
-        <a href="{% url 'home' %}">Top 100</a>
+        <a href="{% url 'home' %}">{% trans "Top 100" %}</a>
       </div>
+
       <nav class="menu">
-        <a href="{% url 'home' %}" class="{% block nav_home %}{% endblock %}">Inicio</a>
-        <a href="{% url 'songs:list' %}" class="{% block nav_songs %}{% endblock %}">Canciones</a>
-        <a href="{% url 'genres:list' %}" class="{% block nav_genres %}{% endblock %}">Estilos</a>
-        <a href="{% url 'artists:list' %}" class="{% block nav_artists %}{% endblock %}">Intérpretes</a>
+        <a href="{% url 'home' %}" class="{% block nav_home %}{% endblock %}">{% trans "Inicio" %}</a>
+        <a href="{% url 'songs:list' %}" class="{% block nav_songs %}{% endblock %}">{% trans "Canciones" %}</a>
+        <a href="{% url 'genres:list' %}" class="{% block nav_genres %}{% endblock %}">{% trans "Estilos" %}</a>
+        <a href="{% url 'artists:list' %}" class="{% block nav_artists %}{% endblock %}">{% trans "Intérpretes" %}</a>
       </nav>
-      <form class="search" action="#" method="get" role="search" aria-label="Buscar">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <input type="search" name="q" placeholder="Buscar..." aria-label="Buscar"/>
+
+      {# Selector de idioma #}
+      <form action="{% url 'set_language' %}" method="post" class="language-switcher">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <select name="language" onchange="this.form.submit()">
+          <option value="es" {% if request.LANGUAGE_CODE == 'es' %}selected{% endif %}>ES</option>
+          <option value="en" {% if request.LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
+        </select>
+      </form>
+
+      <form class="search" action="#" method="get" role="search" aria-label="{% trans 'Buscar' %}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input type="search" name="q" placeholder="{% trans 'Buscar...' %}" aria-label="{% trans 'Buscar' %}"/>
       </form>
     </div>
   </header>
@@ -38,12 +54,16 @@
 
   <footer class="footer">
     <div class="container row">
-      <div class="grow">© {{ now|default:"2025" }} Top 100 · Tendencias reales, sin ruido</div>
+      <div class="grow">
+        {% blocktrans with year=now|default:"2025" %}
+        © {{ year }} Top 100 · Tendencias reales, sin ruido
+        {% endblocktrans %}
+      </div>
       <div class="chips">
-        <span class="chip">Rock, Pop, Indie y más</span>
-        <span class="chip">Top 100 internacional</span>
-        <span class="chip">Explora artistas emergentes</span>
-        <span class="chip">Música sin fronteras</span>
+        <span class="chip">{% trans "Rock, Pop, Indie y más" %}</span>
+        <span class="chip">{% trans "Top 100 internacional" %}</span>
+        <span class="chip">{% trans "Explora artistas emergentes" %}</span>
+        <span class="chip">{% trans "Música sin fronteras" %}</span>
       </div>
     </div>
   </footer>

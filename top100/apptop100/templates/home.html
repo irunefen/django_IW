@@ -1,50 +1,67 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
-{% block title %}Inicio · Top 100{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Inicio · Top 100" %}{% endblock %}
 {% block nav_home %}active{% endblock %}
 
 {% block content %}
 <section class="hero">
   <div class="row">
     <div class="grow">
-      <div class="kicker">Bienvenido</div>
-      <h1 class="title">Top 100 — Lo más escuchado por estilo</h1>
-      <p class="muted">Se muestra una canción destacada por cada estilo musical</p>
+      <div class="kicker">{% trans "Bienvenido" %}</div>
+      <h1 class="title">{% trans "Top 100 — Lo más escuchado por estilo" %}</h1>
+      <p class="muted">
+        {% trans "Se muestra una canción destacada por cada estilo musical" %}
+      </p>
     </div>
-    <a class="btn" href="{% url 'songs:list' %}">Ver todas las canciones</a>
+    <a class="btn" href="{% url 'songs:list' %}">{% trans "Ver todas las canciones" %}</a>
   </div>
 </section>
 
 <section class="section grid cols-3">
   {% for estilo, cancion in destacados %}
   <article class="card">
-    <div class="badge">Estilo: <strong>{{ estilo.nombre }}</strong></div>
+    <div class="badge">
+      {% trans "Estilo:" %} <strong>{{ estilo.nombre }}</strong>
+    </div>
     <div class="cover">
       {% if cancion.album.imagen %}
-      <img src="{{ cancion.album.imagen }}" alt="Carátula de {{ cancion.album.titulo }}" loading="lazy">
+      <img src="{{ cancion.album.imagen }}"
+           alt="{% blocktrans with album_title=cancion.album.titulo %}Carátula de {{ album_title }}{% endblocktrans %}"
+           loading="lazy">
       {% endif %}
     </div>
+
     {% if cancion %}
     <h3 class="title card-title-lg">{{ cancion.nombre }}</h3>
     <div class="muted">
-      {% for artista in cancion.artistas.all %}{{ artista.nombre }}{% if not forloop.last %}, {% endif %}{% endfor %}
-      · <span class="rank">#1</span> en el ranking de {{ estilo.nombre }}
+      {% for artista in cancion.artistas.all %}
+        {{ artista.nombre }}{% if not forloop.last %}, {% endif %}
+      {% endfor %}
+      · <span class="rank">#1</span>
+      {% blocktrans with style_name=estilo.nombre %}
+        en el ranking de {{ style_name }}
+      {% endblocktrans %}
     </div>
     <div class="row mt-base">
-      <a class="btn ghost" href="{% url 'genres:detail' pk=estilo.pk %}">Ver estilo</a>
-      <a class="btn" href="{% url 'songs:detail' pk=cancion.pk %}">Ver canción</a>
+      <a class="btn ghost" href="{% url 'genres:detail' pk=estilo.pk %}">{% trans "Ver estilo" %}</a>
+      <a class="btn" href="{% url 'songs:detail' pk=cancion.pk %}">{% trans "Ver canción" %}</a>
     </div>
+
     {% else %}
-    <h3 class="title card-title-lg">Sin canciones</h3>
-    <div class="muted">No hay canciones disponibles para este estilo.</div>
+    <h3 class="title card-title-lg">{% trans "Sin canciones" %}</h3>
+    <div class="muted">
+      {% trans "No hay canciones disponibles para este estilo." %}
+    </div>
     <div class="row mt-base">
-      <a class="btn ghost" href="{% url 'genres:detail' pk=estilo.pk %}">Ver estilo</a>
+      <a class="btn ghost" href="{% url 'genres:detail' pk=estilo.pk %}">{% trans "Ver estilo" %}</a>
     </div>
     {% endif %}
   </article>
+
   {% empty %}
   <article class="card">
-    <p class="muted">No hay estilos disponibles.</p>
+    <p class="muted">{% trans "No hay estilos disponibles." %}</p>
   </article>
   {% endfor %}
 </section>

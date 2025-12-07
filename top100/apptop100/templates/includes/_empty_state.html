@@ -1,10 +1,18 @@
 <!DOCTYPE html>
+{% load i18n %}
+
 <div class="card soft" role="status" aria-live="polite">
   <div class="row">
     <div class="grow">
-      <div class="title empty-title">Aún no hay datos para mostrar</div>
-      <div class="muted">Este es un mensaje provisional hasta conectar la parte de modelos/lógica.</div>
+      <div class="title empty-title">
+        {% trans "Aún no hay datos para mostrar" %}
+      </div>
+      <div class="muted">
+        {% trans "Este es un mensaje provisional hasta conectar la parte de modelos/lógica." %}
+      </div>
     </div>
-    <a class="btn ghost" href="#">Acción opcional</a>
+    <a class="btn ghost" href="#">
+      {% trans "Acción opcional" %}
+    </a>
   </div>
 </div>

@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<nav class="row" aria-label="Paginación">
-  <a class="btn ghost" href="#">← Anterior</a>
+{% load i18n %}
+
+<nav class="row" aria-label="{% trans 'Paginación' %}">
+  <a class="btn ghost" href="#">← {% trans "Anterior" %}</a>
+
   <div class="chips">
-    <span class="chip">Página 1 de 10</span>
+    {% blocktrans with page=1 total=10 %}
+    Página {{ page }} de {{ total }}
+    {% endblocktrans %}
   </div>
-  <a class="btn ghost" href="#">Siguiente →</a>
+
+  <a class="btn ghost" href="#">{% trans "Siguiente" %} →</a>
 </nav>

@@ -1,44 +1,65 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
-{% block title %}Detalle de canción · Top 100{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Detalle de canción · Top 100" %}{% endblock %}
 {% block nav_songs %}active{% endblock %}
 
 {% block content %}
 <nav class="breadcrumbs section">
-  <a href="{% url 'home' %}">Inicio</a>
-  <a href="{% url 'songs:list' %}">Canciones</a>
-  <span>Detalle</span>
+  <a href="{% url 'home' %}">{% trans "Inicio" %}</a>
+  <a href="{% url 'songs:list' %}">{% trans "Canciones" %}</a>
+  <span>{% trans "Detalle" %}</span>
 </nav>
 
 <section class="grid cols-2 section">
   <div class="card">
     <div class="cover cover-wide">
       {% if song.album.imagen %}
-      <img src="{{ song.album.imagen }}" alt="Carátula de {{ song.album.titulo }}" loading="lazy">
+      <img src="{{ song.album.imagen }}"
+           alt="{% blocktrans with album_title=song.album.titulo %}Carátula de {{ album_title }}{% endblocktrans %}"
+           loading="lazy">
       {% endif %}
     </div>
   </div>
   <div class="card">
-    <div class="kicker">Canción</div>
+    <div class="kicker">{% trans "Canción" %}</div>
     <h1 class="title">{{ song.nombre }}</h1>
-    <p class="muted">Reproducciones: {{ song.reproducciones|default:"0" }} · Duración: {{ song.duracion|default:"0" }}s</p>
-    <p>Estilo: <a class="badge" href="{% url 'genres:detail' pk=song.estilo.pk %}">{{ song.estilo.nombre }}</a></p>
-    <p>Intérpretes:</p>
+
+    <p class="muted">
+      {% blocktrans with plays=song.reproducciones|default:"0" duration=song.duracion|default:"0" %}
+      Reproducciones: {{ plays }} · Duración: {{ duration }}s
+      {% endblocktrans %}
+    </p>
+
+    <p>
+      {% trans "Estilo:" %}
+      <a class="badge" href="{% url 'genres:detail' pk=song.estilo.pk %}">{{ song.estilo.nombre }}</a>
+    </p>
+
+    <p>{% trans "Intérpretes:" %}</p>
     <div class="chips">
       {% for artista in song.artistas.all %}
       <a class="chip" href="{% url 'artists:detail' pk=artista.pk %}">{{ artista.nombre }}</a>
       {% empty %}
-      <span class="chip">Sin artistas</span>
+      <span class="chip">{% trans "Sin artistas" %}</span>
       {% endfor %}
     </div>
+
     <p class="mt-lg">
       {% if song.album %}
-      Álbum: <strong>{{ song.album.titulo }}</strong>
+      {% blocktrans with album_title=song.album.titulo %}
+      Álbum: <strong>{{ album_title }}</strong>
+      {% endblocktrans %}
       {% endif %}
     </p>
+
     <div class="row mt-lg">
-      <button class="btn" type="button" disabled>Reproducir (demo)</button>
-      <a class="btn ghost" href="{% url 'songs:list' %}">Volver al listado</a>
+      <button class="btn" type="button" disabled>
+        {% trans "Reproducir (demo)" %}
+      </button>
+      <a class="btn ghost" href="{% url 'songs:list' %}">
+        {% trans "Volver al listado" %}
+      </a>
     </div>
   </div>
 </section>

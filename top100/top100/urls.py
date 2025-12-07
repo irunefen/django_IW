@@ -18,6 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path("", include("apptop100.urls")),  # la pagina web
-    path('admin/', admin.site.urls),
+    # Soporte para cambiar de idioma (set_language)
+    path("i18n/", include("django.conf.urls.i18n")),
+
+    # Español (idioma por defecto)
+    path("", include("apptop100.urls")),
+
+    # Inglés: mismo conjunto de URLs pero bajo el prefijo /en/
+    path("en/", include("apptop100.urls")),
+
+    # Admin
+    path("admin/", admin.site.urls),
 ]

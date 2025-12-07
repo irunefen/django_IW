@@ -1,52 +1,84 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
-{% block title %}Detalle de estilo · Top 100{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Detalle de estilo · Top 100" %}{% endblock %}
 {% block nav_genres %}active{% endblock %}
 
 {% block content %}
 <nav class="breadcrumbs section">
-  <a href="{% url 'home' %}">Inicio</a> 
-  <a href="{% url 'genres:list' %}">Estilos</a> 
-  <span>Detalle</span>
+  <a href="{% url 'home' %}">{% trans "Inicio" %}</a>
+  <a href="{% url 'genres:list' %}">{% trans "Estilos" %}</a>
+  <span>{% trans "Detalle" %}</span>
 </nav>
 
 <section class="grid cols-2 section">
   <article class="card">
-    <div class="kicker">Estilo</div>
+    <div class="kicker">{% trans "Estilo" %}</div>
     <h1 class="title">{{ genre.nombre }}</h1>
-    <p class="muted">{{ genre.descripcion|default:"Sin descripción disponible." }}</p>
+
+    <p class="muted">
+      {% if genre.descripcion %}
+        {{ genre.descripcion }}
+      {% else %}
+        {% trans "Sin descripción disponible." %}
+      {% endif %}
+    </p>
+
     <div class="chips mt-md">
-      <span class="chip">Canciones: {{ songs.count }}</span>
+      <span class="chip">
+        {% blocktrans with count=songs.count %}
+        Canciones: {{ count }}
+        {% endblocktrans %}
+      </span>
     </div>
   </article>
 
   <article class="card soft">
-    <h3 class="title card-title-featured">Canción destacada</h3>
+    <h3 class="title card-title-featured">{% trans "Canción destacada" %}</h3>
     {% if songs.first %}
-    <p class="muted"><strong>{{ songs.first.nombre }}</strong> - La canción mejor posicionada en el ranking para este estilo.</p>
+    <p class="muted">
+      <strong>{{ songs.first.nombre }}</strong>
+      {% trans " - La canción mejor posicionada en el ranking para este estilo." %}
+    </p>
     <div class="row">
-      <a class="btn" href="{% url 'songs:detail' pk=songs.first.pk %}">Ver canción</a>
+      <a class="btn" href="{% url 'songs:detail' pk=songs.first.pk %}">{% trans "Ver canción" %}</a>
     </div>
     {% else %}
-    <p class="muted">No hay canciones disponibles para este estilo.</p>
+    <p class="muted">
+      {% trans "No hay canciones disponibles para este estilo." %}
+    </p>
     {% endif %}
   </article>
 </section>
 
 <section class="section card">
-  <h2 class="title section-title">Todas las canciones del estilo</h2>
+  <h2 class="title section-title">{% trans "Todas las canciones del estilo" %}</h2>
   <table class="table">
-    <thead><tr><th>#</th><th>Título</th><th>Intérpretes</th></tr></thead>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>{% trans "Título" %}</th>
+        <th>{% trans "Intérpretes" %}</th>
+      </tr>
+    </thead>
     <tbody>
       {% for cancion in songs %}
       <tr>
         <td class="rank">#{{ forloop.counter }}</td>
-        <td><a href="{% url 'songs:detail' pk=cancion.pk %}">{{ cancion.nombre }}</a></td>
-        <td class="muted">{% for artista in cancion.artistas.all %}{{ artista.nombre }}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+        <td>
+          <a href="{% url 'songs:detail' pk=cancion.pk %}">{{ cancion.nombre }}</a>
+        </td>
+        <td class="muted">
+          {% for artista in cancion.artistas.all %}
+            {{ artista.nombre }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </td>
       </tr>
       {% empty %}
       <tr>
-        <td colspan="3" class="table-empty">No hay canciones para este estilo.</td>
+        <td colspan="3" class="table-empty">
+          {% trans "No hay canciones para este estilo." %}
+        </td>
       </tr>
       {% endfor %}
     </tbody>
