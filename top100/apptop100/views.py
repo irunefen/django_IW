@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from .models import Cancion, Estilo, Artista, Album
 
+from django.http import JsonResponse
+from django.urls import reverse
+from django.views.decorators.http import require_GET
+
 def home(request):
     estilos = Estilo.objects.order_by('nombre')
     destacados = []
@@ -51,3 +55,35 @@ def show_album(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
     context = {"album": album}
     return render(request, "albums/detail.html", context)
+
+@require_GET
+def songs_api(request):
+    """
+    Devuelve un JSON con la lista de canciones filtradas por nombre (búsqueda).
+    Se usará mediante AJAX desde la plantilla.
+    """
+    q = request.GET.get("q", "").strip()
+
+    qs = (
+        Cancion.objects
+        .select_related("estilo")
+        .prefetch_related("artistas")
+        .all()
+        .order_by("-reproducciones")  # por ejemplo
+    )
+
+    if q:
+        qs = qs.filter(nombre__icontains=q)
+
+    data = []
+    for song in qs[:50]:  # limita resultados
+        data.append({
+            "id": song.pk,
+            "name": song.nombre,
+            "genre": song.estilo.nombre if song.estilo else "",
+            "artists": ", ".join(a.nombre for a in song.artistas.all()),
+            "detail_url": reverse("songs:detail", args=[song.pk]),
+            "genre_url": reverse("genres:detail", args=[song.estilo.pk]) if song.estilo else "",
+        })
+
+    return JsonResponse({"results": data})

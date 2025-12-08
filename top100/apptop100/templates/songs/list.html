@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "Canciones · Top 100" %}{% endblock %}
 {% block nav_songs %}active{% endblock %}
@@ -14,13 +14,19 @@
         {% trans "Haz clic en una fila para ver los detalles." %}
       </p>
     </div>
+
+    {# Buscador dinámico #}
     <div class="chips">
-      <span class="chip">
-        {% trans "Orden: Popularidad" %}
-      </span>
-      <span class="chip">
-        {% trans "Filtro: Ninguno" %}
-      </span>
+      <input
+        type="search"
+        id="song-search"
+        class="chip"
+        placeholder="{% trans 'Buscar canciones...' %}"
+        aria-label="{% trans 'Buscar canciones' %}"
+      />
+      <button id="song-search-clear" type="button" class="chip">
+        {% trans "Limpiar filtro" %}
+      </button>
     </div>
   </div>
 </section>
@@ -37,10 +43,12 @@
           <th>{% trans "Acciones" %}</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="songs-table-body">
         {% for cancion in songs %}
-        <tr>
-          <td><span class="rank">#{{ forloop.counter }}</span></td>
+        <tr class="song-row">
+          <td>
+            <span class="rank">#{{ forloop.counter }}</span>
+          </td>
           <td>
             <a href="{% url 'songs:detail' pk=cancion.pk %}">
               {{ cancion.nombre }}
@@ -75,4 +83,8 @@
 </section>
 
 {% include "includes/_pagination.html" %}
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="{% static 'js/songs.js' %}"></script>
 {% endblock %}

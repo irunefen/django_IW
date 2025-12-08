@@ -303,3 +303,19 @@ header.nav {
     color: var(--muted);
     border-top: 1px solid var(--border);
 }
+
+/* Efecto de "cargando" mientras llega el AJAX */
+#songs-table-body.is-loading {
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+
+/* Efecto hover para filas clicables */
+.song-row {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.song-row.row-hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}

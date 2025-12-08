@@ -4,6 +4,7 @@ from . import views
 songs_patterns = ([
     path('', views.index_canciones, name='list'),
     path('<int:pk>/', views.show_cancion, name='detail'),
+    path("api/", views.songs_api, name="api"),
 ], 'songs')
 
 genres_patterns = ([
