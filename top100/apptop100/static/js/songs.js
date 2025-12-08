@@ -7,7 +7,6 @@
 
   if (!searchInput || !tableBody) return;
 
-  // Pequeño debounce para no hacer fetch en cada tecla
   let debounceTimer = null;
 
   function fetchSongs(query) {
@@ -16,7 +15,6 @@
       url.searchParams.set("q", query);
     }
 
-    // Efecto visual: opacidad baja mientras carga
     tableBody.classList.add("is-loading");
 
     fetch(url, {
@@ -32,7 +30,7 @@
         console.error("Error fetching songs:", err);
       })
       .finally(() => {
-        // restaurar opacidad
+
         setTimeout(() => {
           tableBody.classList.remove("is-loading");
         }, 150);
@@ -69,7 +67,6 @@
   function attachRowClickEffects() {
     const rows = tableBody.querySelectorAll(".song-row");
     rows.forEach((row) => {
-      // EFECTO: fila clicable -> navega al detalle
       row.addEventListener("click", (e) => {
         const link = row.querySelector("td:nth-child(2) a");
         if (link) {
@@ -77,12 +74,10 @@
         }
       });
 
-      // Evitar que un click directo en un botón/link repita navegación
       row.querySelectorAll("a, button").forEach((el) => {
         el.addEventListener("click", (e) => e.stopPropagation());
       });
 
-      // EFECTO: hover con clase extra (puedes definirla en CSS)
       row.addEventListener("mouseenter", () => {
         row.classList.add("row-hover");
       });
@@ -92,7 +87,6 @@
     });
   }
 
-  // Listener de búsqueda
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.trim();
 
@@ -105,7 +99,6 @@
     }, 300);
   });
 
-  // Botón "Limpiar filtro"
   if (clearButton) {
     clearButton.addEventListener("click", () => {
       searchInput.value = "";
@@ -113,6 +106,5 @@
     });
   }
 
-  // Inicial: enganchar efectos a las filas ya renderizadas
   attachRowClickEffects();
 })();

@@ -277,12 +277,11 @@ header.nav {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* Dropdown de resultados (vertical, justo debajo del input) */
 .search-results {
   position: absolute;
   left: 0;
-  top: 115%;               /* un poco por debajo del input */
-  width: 100%;             /* mismo ancho que .search */
+  top: 115%;              
+  width: 100%;            
   background: rgba(11, 16, 32, 0.98);
   border-radius: 12px;
   box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
@@ -344,7 +343,6 @@ header.nav {
   padding: 0.25rem 0.35rem;
 }
 
-/* COVER (carátulas/portadas) */
 .cover {
     width: 100%;
     aspect-ratio: 1/1;
@@ -385,13 +383,11 @@ header.nav {
     border-top: 1px solid var(--border);
 }
 
-/* Efecto de "cargando" mientras llega el AJAX */
 #songs-table-body.is-loading {
   opacity: 0.4;
   transition: opacity 0.2s ease;
 }
 
-/* Efecto hover para filas clicables */
 .song-row {
   cursor: pointer;
   transition: background-color 0.15s ease;
@@ -399,4 +395,48 @@ header.nav {
 
 .song-row.row-hover {
   background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* LANGUAGE SWITCHER */
+.language-switcher {
+  display: flex;
+  align-items: center;
+}
+
+.language-switcher select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.45rem 2rem 0.45rem 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2300b4d8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  background-size: 12px;
+}
+
+.language-switcher select:hover {
+  background-color: rgba(0, 180, 216, 0.12);
+  border-color: rgba(0, 180, 216, 0.35);
+  box-shadow: var(--glow-teal);
+}
+
+.language-switcher select:focus {
+  outline: 2px solid rgba(0, 180, 216, 0.5);
+  outline-offset: 2px;
+  background-color: rgba(0, 180, 216, 0.15);
+}
+
+.language-switcher select option {
+  background: var(--bg);
+  color: var(--text);
+  padding: 0.5rem;
 }

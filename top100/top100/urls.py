@@ -1,32 +1,11 @@
-"""
-URL configuration for top100 project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
 from apptop100 import views as core_views
+from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
-    # Soporte para cambiar de idioma (set_language)
+    # Soporte para cambiar de idioma 
     path("i18n/", include("django.conf.urls.i18n")),
-
-    # Español (idioma por defecto)
-    path("", include("apptop100.urls")),
-
-    # Inglés: mismo conjunto de URLs pero bajo el prefijo /en/
-    path("en/", include("apptop100.urls")),
 
     # Admin
     path("admin/", admin.site.urls),
@@ -34,3 +13,9 @@ urlpatterns = [
     # API de búsqueda global
     path("search/api/", core_views.global_search_api, name="global_search_api"),
 ]
+
+# URLs con soporte multiidioma 
+urlpatterns += i18n_patterns(
+    path("", include("apptop100.urls")),
+    prefix_default_language=True,
+)

@@ -58,10 +58,6 @@ def show_album(request, album_id):
 
 @require_GET
 def songs_api(request):
-    """
-    Devuelve un JSON con la lista de canciones filtradas por nombre (búsqueda).
-    Mediante AJAX desde la plantilla.
-    """
     q = request.GET.get("q", "").strip()
 
     qs = (
@@ -89,10 +85,6 @@ def songs_api(request):
     return JsonResponse({"results": data})
 
 def global_search_api(request):
-    """
-    API JSON para el buscador global del header.
-    Devuelve canciones, artistas, estilos y álbumes que contengan 'q'.
-    """
     q = request.GET.get("q", "").strip()
     if not q:
         return JsonResponse(
