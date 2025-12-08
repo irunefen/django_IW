@@ -16,7 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls.i18n import i18n_patterns
 from apptop100 import views as core_views
 
 urlpatterns = [
