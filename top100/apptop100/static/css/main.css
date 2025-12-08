@@ -246,21 +246,102 @@ header.nav {
 
 /* BUSCADOR */
 .search {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.75rem;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  position: relative;
+  width: 260px;              /* ancho fijo del buscador */
+  flex: 0 0 auto;            /* que NO se estire en el flex del header */
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
 }
-.search input {
-    border: none;
-    outline: none;
-    background: transparent;
-    color: var(--text);
-    width: 180px;
+
+/* icono lupa dentro del buscador (opcional, por estética) */
+.search svg {
+  flex: 0 0 auto;
+  opacity: 0.7;
+}
+
+/* input del buscador */
+.search input[type="search"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 0.45rem 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text);
+  outline: none;
+}
+
+.search input[type="search"]::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Dropdown de resultados (vertical, justo debajo del input) */
+.search-results {
+  position: absolute;
+  left: 0;
+  top: 115%;               /* un poco por debajo del input */
+  width: 100%;             /* mismo ancho que .search */
+  background: rgba(11, 16, 32, 0.98);
+  border-radius: 12px;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
+  padding: 0.4rem 0.6rem;
+  display: none;
+  z-index: 50;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.search-results.is-open {
+  display: block;
+}
+
+.search-result-section + .search-result-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 0.35rem;
+  padding-top: 0.35rem;
+}
+
+.search-result-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  margin-bottom: 0.15rem;
+}
+
+.search-result-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-result-item a {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem 0.35rem;
+  border-radius: 0.4rem;
+  text-decoration: none;
+}
+
+.search-result-item a:hover {
+  background: rgba(56, 189, 248, 0.16);
+}
+
+.search-result-name {
+  font-size: 0.82rem;
+}
+
+.search-result-sub {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.search-result-empty {
+  font-size: 0.78rem;
+  opacity: 0.7;
+  padding: 0.25rem 0.35rem;
 }
 
 /* COVER (carátulas/portadas) */

@@ -60,7 +60,7 @@ def show_album(request, album_id):
 def songs_api(request):
     """
     Devuelve un JSON con la lista de canciones filtradas por nombre (búsqueda).
-    Se usará mediante AJAX desde la plantilla.
+    Mediante AJAX desde la plantilla.
     """
     q = request.GET.get("q", "").strip()
 
@@ -69,14 +69,14 @@ def songs_api(request):
         .select_related("estilo")
         .prefetch_related("artistas")
         .all()
-        .order_by("-reproducciones")  # por ejemplo
+        .order_by("-reproducciones")
     )
 
     if q:
         qs = qs.filter(nombre__icontains=q)
 
     data = []
-    for song in qs[:50]:  # limita resultados
+    for song in qs[:50]:
         data.append({
             "id": song.pk,
             "name": song.nombre,
@@ -87,3 +87,60 @@ def songs_api(request):
         })
 
     return JsonResponse({"results": data})
+
+def global_search_api(request):
+    """
+    API JSON para el buscador global del header.
+    Devuelve canciones, artistas, estilos y álbumes que contengan 'q'.
+    """
+    q = request.GET.get("q", "").strip()
+    if not q:
+        return JsonResponse(
+            {"songs": [], "artists": [], "genres": [], "albums": []}
+        )
+
+    # Limita resultados para no petar la UI
+    songs_qs = Cancion.objects.filter(nombre__icontains=q)[:5]
+    artists_qs = Artista.objects.filter(nombre__icontains=q)[:5]
+    genres_qs = Estilo.objects.filter(nombre__icontains=q)[:5]
+    albums_qs = Album.objects.filter(titulo__icontains=q)[:5]
+
+    data = {
+        "songs": [
+            {
+                "type": "song",
+                "name": s.nombre,
+                "subtitle": s.estilo.nombre if getattr(s, "estilo", None) else "",
+                "url": reverse("songs:detail", args=[s.pk]),
+            }
+            for s in songs_qs
+        ],
+        "artists": [
+            {
+                "type": "artist",
+                "name": a.nombre,
+                "subtitle": "",
+                "url": reverse("artists:detail", args=[a.pk]),
+            }
+            for a in artists_qs
+        ],
+        "genres": [
+            {
+                "type": "genre",
+                "name": g.nombre,
+                "subtitle": "",
+                "url": reverse("genres:detail", args=[g.pk]),
+            }
+            for g in genres_qs
+        ],
+        "albums": [
+            {
+                "type": "album",
+                "name": alb.titulo,
+                "subtitle": "",
+                "url": reverse("album_detail", args=[alb.pk]),
+            }
+            for alb in albums_qs
+        ],
+    }
+    return JsonResponse(data)
